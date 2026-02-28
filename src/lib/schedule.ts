@@ -1,15 +1,19 @@
-import { supabase } from "./supabase";
+import { getSupabase } from "./supabase";
 import { formatDate } from "./dateUtils";
 import type { CollectionDay, PickupDay } from "@/types";
 
 /**
  * Fetch collection days for a specific pickup day within a date range.
+ * Returns an empty array if Supabase is not configured.
  */
 export async function getCollectionDays(
   pickupDay: PickupDay,
   startDate: Date,
   endDate: Date
 ): Promise<CollectionDay[]> {
+  const supabase = getSupabase();
+  if (!supabase) return [];
+
   const { data, error } = await supabase
     .from("collection_days")
     .select("*")
