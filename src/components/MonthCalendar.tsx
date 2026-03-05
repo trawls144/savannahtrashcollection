@@ -9,12 +9,14 @@ interface MonthCalendarProps {
   year: number;
   month: number; // 0-indexed
   collectionDays: CollectionDay[];
+  hideHeader?: boolean;
 }
 
 export function MonthCalendar({
   year,
   month,
   collectionDays,
+  hideHeader,
 }: MonthCalendarProps) {
   const today = new Date();
   const grid = getMonthGrid(year, month);
@@ -30,9 +32,11 @@ export function MonthCalendar({
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">
-        {monthName} {year}
-      </h3>
+      {!hideHeader && (
+        <h3 className="text-lg font-semibold mb-4">
+          {monthName} {year}
+        </h3>
+      )}
 
       {/* Day headers */}
       <div className="grid grid-cols-7 gap-1 mb-1">

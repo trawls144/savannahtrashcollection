@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { WeekStrip } from "@/components/WeekStrip";
-import { MonthCalendar } from "@/components/MonthCalendar";
+import { MonthNavigator } from "@/components/MonthNavigator";
 import { getCollectionDays } from "@/lib/schedule";
 import { getCurrentWeekRange, getCurrentMonthRange } from "@/lib/dateUtils";
 import type { PickupDay } from "@/types";
@@ -88,16 +88,17 @@ export default async function SchedulePage({
 
       <Separator className="my-6" />
 
-      {/* Section B: This Month */}
+      {/* Section B: Monthly Calendar */}
       <Card>
         <CardHeader>
-          <CardTitle>This Month</CardTitle>
+          <CardTitle>Monthly Calendar</CardTitle>
         </CardHeader>
         <CardContent>
-          <MonthCalendar
-            year={today.getFullYear()}
-            month={today.getMonth()}
-            collectionDays={monthDays}
+          <MonthNavigator
+            pickupDay={day}
+            initialYear={today.getFullYear()}
+            initialMonth={today.getMonth()}
+            initialData={monthDays}
           />
         </CardContent>
       </Card>
